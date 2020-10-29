@@ -1,4 +1,7 @@
+const { v4: uuidv4 } = require('uuid');
 const Bio= require('./biomodel');
+
+let b_id = "";
 //for index
 exports.index = (req,res)=> {
     Bio.get((err, bio) => {
@@ -12,6 +15,7 @@ exports.index = (req,res)=> {
             message: "Got Bio Successfully!",
             data: bio       
         });
+        // console.log(uuidv4();
     });
 };
 
@@ -19,11 +23,13 @@ exports.index = (req,res)=> {
 // Creating new BIo
 exports.add = (req, res) => {
     var bio = new Bio();
+    bio.bio_id = uuidv4();
     bio.name = req.body.name? req.body.name : bio.name;
     bio.email = req.body.email;
     bio.phone = req.body.phone;
     bio.address = req.body.address;
 
+    b_id =bio.bio_id;
 // Save and check error
     bio.save((err) =>{
         if(err){

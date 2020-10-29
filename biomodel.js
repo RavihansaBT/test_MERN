@@ -2,6 +2,9 @@ const { Mongoose } = require("mongoose")
 const mongoose = require('mongoose');
 
 var bioSchema = mongoose.Schema({
+    bio_id : {
+        type : String
+    },
     name : {
         type : String,
         required : true
