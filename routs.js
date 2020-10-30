@@ -12,7 +12,11 @@ router.get('/',(req, res) =>{
 // Bio Routs
 router.route('/bio')
     .get(bioController.index)
-    .post(bioController.add);
+    .post(bioController.add)
+    .post(bioController.uploadFile);
+
+router.route('/upload-avatar')
+    .post(bioController.uploadFile);
 
 router.route('/bio/:bio_id')
     .get(bioController.view)

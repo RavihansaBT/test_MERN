@@ -1,5 +1,5 @@
+const Bio = require('./biomodel');
 const { v4: uuidv4 } = require('uuid');
-const Bio= require('./biomodel');
 
 let b_id = "";
 //for index
@@ -92,4 +92,35 @@ exports.delete =  (req, res) => {
             message: 'Bio Deleted'
         })
     })
+};
+
+// file upload
+exports.uploadFile = async (req, res) => {
+    try {
+        if (!req.files) {
+            console.log("test");
+            res.send({
+                status : false,
+                message : "No files pload"
+            });
+        }
+        else{
+            let avatar = req.files.avatar;
+
+            avatar.mv('./uploads/' + avatar.name);
+
+            res.send({
+                status : true,
+                message : "File uploaded",
+                data :{
+                    name : avatar.name,
+                    mimetype : avatar.mimetype,
+                    size : avatar.size
+                }
+            });
+        }
+        
+    } catch (error) {
+        res.status(500).send(err);
+    }
 }
