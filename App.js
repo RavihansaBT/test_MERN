@@ -3,6 +3,7 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const morgan = require('morgan');
 const _ = require('lodash');
+const fs = require('fs');
 
 const app = express();
 var port = process.env.port || 3000;

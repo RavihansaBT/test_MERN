@@ -24,6 +24,10 @@ var bioSchema = mongoose.Schema({
     created_at : {
         type : Date,
         default: Date.now
+    },
+    upload_files : {
+        type : Array,
+        required : false
     }
 });
 

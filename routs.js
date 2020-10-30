@@ -15,9 +15,6 @@ router.route('/bio')
     .post(bioController.add)
     .post(bioController.uploadFile);
 
-router.route('/upload-avatar')
-    .post(bioController.uploadFile);
-
 router.route('/bio/:bio_id')
     .get(bioController.view)
     .patch(bioController.update)
