@@ -13,7 +13,6 @@ router.get('/',(req, res) =>{
 router.route('/bio')
     .get(bioController.index)
     .post(bioController.add)
-    .post(bioController.uploadFile);
 
 router.route('/bio/:bio_id')
     .get(bioController.view)

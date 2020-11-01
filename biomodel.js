@@ -27,7 +27,6 @@ var bioSchema = mongoose.Schema({
     },
     upload_files : {
         type : Array,
-        required : false
     }
 });
 
