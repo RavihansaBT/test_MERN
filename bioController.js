@@ -4,7 +4,6 @@ const fs = require("fs");
 const path = require('path');
 const _ = require('lodash');
 
-let b_id ;
 let uploadFolder = "./uploads/";
 let fileName = [];
 
@@ -225,7 +224,55 @@ exports.delete = (req, res) => {
     })
 };
 
+exports.deleteFile = (req,res) => {
+    const directoryPath = path.join(__dirname, 'uploads');
 
+    fs.readdir(directoryPath, function (err, files) {
+
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+        } 
+
+        let _file = "";
+        if(req.params.fileName){
+            for (let index = 0; index < files.length; index++) {
+                if(files[index] === req.params.fileName){
+                    _file = req.params.fileName;
+                } 
+            }
+            if(_file)
+            {
+                fs.unlinkSync(path.join(directoryPath,_file))
+                    res.send({
+                        status : _file + " deleted"
+                    })
+            }
+            if(!_file){
+                res.send({
+                    status : req.params.fileName + " no suchfile"
+                })
+            }
+            
+            
+        }
+        else{
+            files.forEach( (file) => {            
+                fs.unlinkSync(path.join(directoryPath,file));
+            });
+
+            res.send({
+            status : "Delete all files in upload folder"
+            })
+        }
+        
+        
+
+        
+
+        
+        
+    });
+};
 
 let scanFolder = () => {
     const directoryPath = path.join(__dirname, 'uploads');
@@ -239,6 +286,7 @@ let scanFolder = () => {
         files.forEach(function (file) {
             // Do whatever you want to do with the file
             console.log(file); 
+            // console.log(path.join(directoryPath,file));
         });
     });
 }

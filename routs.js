@@ -20,6 +20,12 @@ router.route('/bio/:bio_id')
     .put(bioController.update)
     .delete(bioController.delete);
 
+router.route('/file')
+    .delete(bioController.deleteFile)
+
+router.route('/file/:fileName')
+    .delete(bioController.deleteFile)
+
 
 
 module.exports = router;
